@@ -2,19 +2,37 @@
 #include<fstream>
 #include<vector>
 #include<iterator>
+#include<sstream>
 
-std::vector<int> numbers; // numeri su cui si lavorerà
+std::vector<int> vettore; // numeri su cui si lavorerà
+
+void check_file(std::ifstream &file){
+    if(!file.is_open()){
+        std::cerr<<"File non found!"<<std::endl;
+    }
+}
 
 // funzione per prendere i dati da file
-void data(char const* argv){
+void take_data(char const* argv){
     std::ifstream data(argv);
-    std::copy(std::istream_iterator<int>(data), std::istream_iterator<int>(), std::back_inserter(numbers));
+    check_file(data);
+    
+    // Leggo file riga per riga
+    std::string line;
+    while(std::getline(data, line)){
+        std::istringstream ss(line);
+        std::string value;
+
+        while(std::getline(ss, value, ',')){
+            vettore.push_back(std::stoi(value));
+        }
+    }
 }
 
 // funzione di stampa
-void print(std::vector<int> numbers){
-    for(; numbers.begin()!=numbers.end(); ++numbers.begin())
-        std::cout<<*numbers.begin()<<", ";
+void print_data(std::vector<int> &numbers){
+    for(int value: numbers)
+        std::cout<<value<<", ";
 }
 
 void parse_cmd(int argc, char **argv){
@@ -25,8 +43,8 @@ void parse_cmd(int argc, char **argv){
 int main(int argc, char* argv[])
 {
     parse_cmd(argc, argv);
-    data(argv[1]);
-    print(numbers);
+    take_data(argv[1]);
+    print_data(vettore);
     return 0;
 }
 
