@@ -1,4 +1,4 @@
-name: Metrics
+name: Licenses
 on:
   # Schedule daily updates
   schedule: [{cron: "0 16 * * *"}]
@@ -8,7 +8,7 @@ on:
   push: {branches: ["master", "main"]}
 
 jobs:
-  github-metrics:
+  github-licenses:
     runs-on: ubuntu-latest
     environment: 
       name: production
