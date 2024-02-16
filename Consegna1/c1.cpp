@@ -19,23 +19,33 @@ void check_file(std::ifstream &file){
     }
 }
 
-// da fare
-int min(std::vector<int> &numbers){
+/**
+ * @brief Funzione che trova l'elemento massimo nella sequenza di elementi
+ * 
+ * @param numbers vettore di elementi
+ * @return int 
+ */
+int max(std::vector<int>& numbers){
+    int max{0};
+    for(int i=0; i<=numbers.size(); ++i){
+        if(numbers[i] > max){
+            max = numbers[i];
+        }
+    }
+    return max;
+}
+
+std::vector<int> elem_occ(auto& numbers, auto& C){
 
 }
 
-// da fare
-int max(std::vector<int> &numbers){
-    
-}
-
-// da fare
 void counting_Sort(auto& vettore){
-    int* C = new int[0];
-    for(; vettore.first!=vettore.last; ++vettore.first){
+    std::vector<int> C;
+    for(int i=0; i<=vettore.size(); ++i){
         while()
     }
 
+    delete C;
 }
 
 /**
@@ -70,7 +80,12 @@ void print_data(std::vector<int> &numbers){
 }
 
 
-
+/**
+ * @brief Analisi dell'input
+ * 
+ * @param argc 
+ * @param argv 
+ */
 void parse_cmd(int argc, char **argv){
     if(argc == 1)
         std::cout<<argv[0]<<"\"nome file\"";
@@ -87,6 +102,9 @@ int main(int argc, char* argv[])
 {
     parse_cmd(argc, argv);
     take_data(argv[1]);
-    print_data(vettore);
+    //print_data(vettore);
+
+    int p = max(vettore);
+    std::cout<<p<<std::endl;
     return 0;
 }
