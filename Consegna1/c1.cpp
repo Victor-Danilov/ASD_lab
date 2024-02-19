@@ -3,6 +3,9 @@
 #include<vector>
 #include<iterator>
 #include<sstream>
+#include"algorithms.hh"
+
+/* ATTENZIONE: algoritmi definiti nel file "algorithms.hh" */
 
 int ct_read = 0;
 
@@ -19,34 +22,6 @@ void check_file(std::ifstream &file){
     }
 }
 
-/**
- * @brief Funzione che trova l'elemento massimo nella sequenza di elementi
- * 
- * @param numbers vettore di elementi
- * @return int 
- */
-int max(std::vector<int>& numbers){
-    int max{0};
-    for(int i=0; i<=numbers.size(); ++i){
-        if(numbers[i] > max){
-            max = numbers[i];
-        }
-    }
-    return max;
-}
-
-std::vector<int> elem_occ(auto& numbers, auto& C){
-
-}
-
-void counting_Sort(auto& vettore){
-    std::vector<int> C;
-    for(int i=0; i<=vettore.size(); ++i){
-        while()
-    }
-
-    delete C;
-}
 
 /**
  * @brief Funzione che legge i dati dal file
@@ -74,7 +49,7 @@ void take_data(char const* argv){
  * 
  * @param numbers elementi da stampare
  */
-void print_data(std::vector<int> &numbers){
+void print_data(std::vector<int>& numbers){
     for(int value: numbers)
         std::cout<<value<<", ";
 }
@@ -104,7 +79,11 @@ int main(int argc, char* argv[])
     take_data(argv[1]);
     //print_data(vettore);
 
-    int p = max(vettore);
-    std::cout<<p<<std::endl;
+    std::vector<int> prova{1,2,3,4,5};
+
+    std::cout<<prova.size();
+    //Insertion_sort(vettore);
+    //std::cout<<"Stampa\n";
+    //print_data(vettore);
     return 0;
 }
