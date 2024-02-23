@@ -1,13 +1,10 @@
 # ASD_lab
 
-| Algorithm | Time Complexity | Space Complexity |
-| --------- | --------------- | ---------------- |
-| [Counting Sort](#counting-sort) | Best: $\Omega(n\log(n))$ <br> Average: $\Theta(n\log(n))$ <br> Worst: $O(n^2)$ | $\Theta(\log(n))$ | 
-| [Radix Sort](#radix-sort) | Best: $\Omega(nk)$ <br> Average: $\Theta(nk)$ <br> Worst: $O(nk)$ | $O(n+k)$ |
+![Complexity](https://github.com/Victor-Danilov/ASD_lab/blob/main/msc/Complexity.png)
 
-## Counting Sort
+## Insertion Sort
 
-## Radix Sort
+
 
 
 <!--<a href="https://github.com/Victor-Danilov">
