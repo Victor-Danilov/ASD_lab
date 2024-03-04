@@ -56,5 +56,10 @@ void Insertion_sort(std::vector<int>& A){
 
 /* INSERTION SORT END*/
 
+/* Quick Sort Start */
+
+
+/* Quick Sort End */
+
 
 #endif // ALGORITHMS_HH_INCLUDE_GUARD

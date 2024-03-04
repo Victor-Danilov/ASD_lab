@@ -36,6 +36,7 @@ void print_array(int *A, int dim) {
     printf("\n");
 }
 
+
 void swap(int &a, int &b) {
     int tmp = a;
     a = b;
@@ -74,6 +75,17 @@ void quick_sort(int *A, int p, int r) {
         int q = partition(A, p, r);
         quick_sort(A, p, q - 1);
         quick_sort(A, q + 1, r);
+    }
+}
+
+void Insertion_sort(int* A, int n){
+    int i;
+    int j;
+    for(i = 0; i < n; ++i){
+        for(j = i - 1; j >= 0; --j){
+            if(A[i] > A[i+1]) swap(A[i], A[i+1]);
+            else break;
+        }
     }
 }
 
@@ -126,7 +138,7 @@ int main(int argc, char **argv) {
     //  fclose(f);
 
     ifstream input_data;
-    input_data.open("prova.txt");
+    input_data.open("data.txt");
 
     int read_min = -1;
     int read_max = -1;
@@ -152,7 +164,9 @@ int main(int argc, char **argv) {
         ct_read = 0;
 
         /// algoritmo di sorting
-        quick_sort(A, 0, n - 1);
+        //quick_sort(A, 0, n - 1);
+        Insertion_sort(A, max_dim);
+
 
         if (details) {
             printf("Output:\n");
@@ -167,7 +181,7 @@ int main(int argc, char **argv) {
             read_max = ct_read;
         printf("Test %d %d\n", test, ct_read);
     }
-
+    printf("ntest, read_min, read_avg, read_max");
     printf("%d,%d,%.1f,%d\n",
            ntests,
            read_min, (0.0 + read_avg) / ntests, read_max);
