@@ -175,7 +175,7 @@ int main(int argc, char **argv) {
             for (i = 0; i < n; i++) {
 
                 // A[i]= n-i;
-                A[i] = i;
+                //A[i] = i;
                 A[i]= rand() % (3*n);
             }
 

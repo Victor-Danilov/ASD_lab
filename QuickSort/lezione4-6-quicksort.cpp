@@ -150,9 +150,9 @@ int main(int argc, char **argv) {
 
             /// inizializzazione array: numeri random con range dimensione array
             for (i = 0; i < n; i++) {
-                A[i] = i;
+                //A[i] = i;
                 // A[i] = n - i;
-                //A[i] = rand() % (n * 50);
+                A[i] = rand() % (n * 50);
             }
 
             if (details) {
