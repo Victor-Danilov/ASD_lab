@@ -3,4 +3,4 @@
 ![Complexity](https://github.com/Victor-Danilov/ASD_lab/blob/main/msc/Complexity.png)
 
 >[!NOTE]
-> Gli algoritmi a confronto non fanno piu' di $O(n\ log(\ n\ ))$
+> Gli algoritmi a confronto non fanno piu' di $\Theta(n\ log(\ n\ ))$
