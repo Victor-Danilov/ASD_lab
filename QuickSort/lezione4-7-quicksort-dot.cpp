@@ -72,9 +72,13 @@ int partition(int *A, int p, int r) {
 
     /// copia valori delle due meta p..q e q+1..r
 
+
+    /*
+        Scelgo un elemento come indice in modo random e lo sostituisco con il pivot
+    */
     int indicerandom = rand() % (r - p + 1) + p;
     swap(A[indicerandom], A[r]);
-    
+    ///
     int x = A[r];
 
     int i = p - 1;
