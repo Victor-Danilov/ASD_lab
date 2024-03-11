@@ -48,7 +48,7 @@ int partition(int *A, int p, int r) {
 
     /// copia valori delle due meta p..q e q+1..r
     ct_read++;
-    int x = A[r];
+    int x = A[r]; // pivot
     int i = p - 1;
 
     for (int j = p; j < r; j++) {
