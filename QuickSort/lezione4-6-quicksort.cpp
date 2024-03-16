@@ -126,7 +126,7 @@ int main(int argc, char **argv) {
     // init random
     srand((unsigned)time(NULL));
 
-    if (ndiv > 1)
+    // if (ndiv > 1)
         cout << "Dim_array,N_test,min_swap,avg_swap,max_swap,min_cmp,avg_cmp,max_cmp,min_read,avg_read,max_read,n*n,n*log(n)\n";
 
     // printf("Parametri: max-dim %d, d %d, t %d, verbose %d\n",max_dim,ndiv,ntests,details);
@@ -190,7 +190,7 @@ int main(int argc, char **argv) {
                 read_max = ct_read;
         }
 
-        if (ndiv > 1)
+        // if (ndiv > 1)
             cout << n << "," << ntests << "," << swap_min << "," << (0.0 + swap_avg) / ntests << "," << swap_max << "," << cmp_min << "," << (0.0 + cmp_avg) / ntests << "," << cmp_max << "," << read_min << "," << (0.0 + read_avg) / ntests << "," << read_max << "," << 0.0 + n * n << "," << 0.0 + n * log(n) / log(2) << "\n";
     }
 

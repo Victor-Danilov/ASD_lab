@@ -313,8 +313,8 @@ int main(int argc, char **argv) {
                 A[i] = rand() % (n/3);
             }
 
-            printf("creato array di dimensione %d\n", n);
-            print_array(A, n);
+            // printf("creato array di dimensione %d\n", n);
+            // print_array(A, n);
 
             ct_swap = 0;
             ct_cmp = 0;
@@ -329,6 +329,7 @@ int main(int argc, char **argv) {
                 print_array_graph(A, 0, n - 1, "node_after", 0);
 
         }
+        
 
     }
 

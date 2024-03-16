@@ -105,11 +105,15 @@ Nodo* addNodeValue(Nodo* nodo, int valore) // inserisce il valore nel nodo
 {
     if(!nodo) return nuovoNodo(valore); // se il nodo è vuoto, lo creo
 
+    ct_read++;
     if(valore < nodo -> key) // se il valore è minore del nodo corrente
+    {
         nodo -> left = addNodeValue(nodo -> left, valore); // inserisco il valore nel sottoalbero sinistro
+    }
     else if(valore > nodo -> key) // se il valore è maggiore del nodo corrente
+    {
         nodo -> right = addNodeValue(nodo -> right, valore); // inserisco il valore nel sottoalbero destro
-
+    }
     return nodo; // restituisco il nodo
 }
 
@@ -198,6 +202,7 @@ int main(int argc, char **argv) {
     long read_avg = 0;
 
     //// lancio ntests volte per coprire diversi casi di input random
+
     for (test = 0; test < ntests; test++) {
 
         /// inizializzazione array: numeri random con range dimensione array
@@ -217,7 +222,7 @@ int main(int argc, char **argv) {
         ct_read = 0;
 
         /// algoritmo di sorting
-        //quick_sort(A, 0, n - 1);
+        // quick_sort(A, 0, n - 1);
         treeSort(A, n);
 
 

@@ -18,6 +18,8 @@ using namespace std;
 // prove con array random --> numero di confronti?
 // ./a.out 1024 -d=16 -t=100
 
+// ./a.exe 16 -graph; dot graph.dot -Tpdf -o graph.pdf
+
 int ct_swap = 0;
 int ct_cmp = 0;
 int ct_read = 0;
@@ -38,26 +40,6 @@ void print_array(int *A, int dim) {
         cout << A[j] << " ";
     }
     cout << "\n";
-}
-
-void print_array_graph(int *A, int p, int r, string s, int pivot) {
-    /// prepara il disegno dell'array A ed il suo contenuto dall'indice a all'indice b inclusi
-    /// usa la stringa c per stampare il nome del nodo
-    /// se pivot = 1 -> colora di rosso lo sfondo
-
-    /// uso codice HTML per creare una tabella con il contenuto dell'array
-
-    // return ;
-
-    output_graph << s << p << "_" << r << " [label=<" << endl
-                 << "<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" ";
-    if (pivot)
-        output_graph << "bgcolor=\"#ff8080\"";
-    output_graph << "> <TR>" << endl;
-    for (int j = p; j <= r; j++) {
-        output_graph << "<TD>" << A[j] << "</TD>" << endl;
-    }
-    output_graph << "</TR> </TABLE>>];" << endl;
 }
 
 // Tree Sort
@@ -82,6 +64,26 @@ struct Nodo *nuovoNodo(int valore) // crea il nuovo nodo
 
     return nuovoNodo; // restituisco il nodo
 }
+// Funzione per generare il codice DOT per un nodo e i suoi figli
+void generate_dot(Nodo* nodo, std::ofstream& out) {
+    if(nodo->left) {
+        out << nodo->key << " -> " << nodo->left->key << ";\n";
+        generate_dot(nodo->left, out);
+    }
+    if(nodo->right) {
+        out << nodo->key << " -> " << nodo->right->key << ";\n";
+        generate_dot(nodo->right, out);
+    }
+}
+
+// Funzione per generare un file DOT per un albero
+void generate_dot_file(Nodo* root) {
+    output_graph.open("graph.dot");
+    output_graph << "digraph BST {\n";
+    generate_dot(root, output_graph);
+    output_graph << "}\n";
+    output_graph.close();
+}
 
 // Dobbiamo definire l'inserimento nell'albero
 Nodo* addNodeValue(Nodo* nodo, int valore) // inserisce il valore nel nodo
@@ -89,9 +91,13 @@ Nodo* addNodeValue(Nodo* nodo, int valore) // inserisce il valore nel nodo
     if(!nodo) return nuovoNodo(valore); // se il nodo è vuoto, lo creo
 
     if(valore < nodo -> key) // se il valore è minore del nodo corrente
+    {
         nodo -> left = addNodeValue(nodo -> left, valore); // inserisco il valore nel sottoalbero sinistro
+    }
     else if(valore > nodo -> key) // se il valore è maggiore del nodo corrente
+    {
         nodo -> right = addNodeValue(nodo -> right, valore); // inserisco il valore nel sottoalbero destro
+    }
 
     return nodo; // restituisco il nodo
 }
@@ -111,7 +117,8 @@ void inOrder(Nodo* nodo, int arr[], int &i) // attraversamento in ordine
 void treeSort(int arr[], int n){
     struct Nodo *root = NULL;
 
-    root = addNodeValue(root, arr[rand() % n]);
+    root = addNodeValue(root, arr[rand() % n]); // creo il nodo radice con elemento random
+
     for (int i = 1; i < n; i++)
     {
         ct_read++;
@@ -120,9 +127,11 @@ void treeSort(int arr[], int n){
     // organizzo l'array
     int i = 0;
     inOrder(root, arr, i);
+    generate_dot_file(root);
 }
 
 /****************************************************************************************************************************/
+
 
 
 int parse_cmd(int argc, char **argv) {
