@@ -30,6 +30,9 @@ int graph = 0;
 
 int n = 0; /// dimensione dell'array
 
+/// file di output per grafo
+ofstream output_graph;
+
 void print_array(int *A, int dim) {
     for (int j = 0; j < dim; j++) {
         cout << A[j] << " ";
@@ -37,45 +40,24 @@ void print_array(int *A, int dim) {
     cout << "\n";
 }
 
-void swap(int &a, int &b) {
-    int tmp = a;
-    a = b;
-    b = tmp;
-    /// aggiorno contatore globale di swap
-    ct_swap++;
-}
+void print_array_graph(int *A, int p, int r, string s, int pivot) {
+    /// prepara il disegno dell'array A ed il suo contenuto dall'indice a all'indice b inclusi
+    /// usa la stringa c per stampare il nome del nodo
+    /// se pivot = 1 -> colora di rosso lo sfondo
 
-int partition(int *A, int p, int r) {
+    /// uso codice HTML per creare una tabella con il contenuto dell'array
 
-    /// copia valori delle due meta p..q e q+1..r
-    ct_read++;
-    int x = A[r]; // pivot
-    int i = p - 1;
+    // return ;
 
-    for (int j = p; j < r; j++) {
-        ct_cmp++;
-        ct_read++;
-        if (A[j] <= x) {
-            i++;
-            ct_read++;
-            ct_read++;
-            swap(A[i], A[j]);
-        }
+    output_graph << s << p << "_" << r << " [label=<" << endl
+                 << "<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" ";
+    if (pivot)
+        output_graph << "bgcolor=\"#ff8080\"";
+    output_graph << "> <TR>" << endl;
+    for (int j = p; j <= r; j++) {
+        output_graph << "<TD>" << A[j] << "</TD>" << endl;
     }
-    ct_read++;
-    ct_read++;
-    swap(A[i + 1], A[r]);
-
-    return i + 1;
-}
-
-void quick_sort(int *A, int p, int r) {
-    /// gli array L e R sono utilizzati come appoggio per copiare i valori: evita le allocazioni nella fase di merge
-    if (p < r) {
-        int q = partition(A, p, r);
-        quick_sort(A, p, q - 1);
-        quick_sort(A, q + 1, r);
-    }
+    output_graph << "</TR> </TABLE>>];" << endl;
 }
 
 // Tree Sort
@@ -193,15 +175,12 @@ int main(int argc, char **argv) {
     srand((unsigned)time(NULL));
 
     if (ndiv > 1)
-        cout << "Dim_array,N_test,min_swap,avg_swap,max_swap,min_cmp,avg_cmp,max_cmp,min_read,avg_read,max_read,n*n,n*log(n)\n";
+        cout << "Dim_array,N_tes,min_read,avg_read,max_read,n*n,n*log(n)\n";
 
     // printf("Parametri: max-dim %d, d %d, t %d, verbose %d\n",max_dim,ndiv,ntests,details);
 
     //// inizio ciclo per calcolare ndiv dimensioni di array crescenti
     for (n = max_dim / ndiv; n <= max_dim; n += max_dim / ndiv) {
-        int swap_min = -1;
-        int swap_max = -1;
-        long swap_avg = 0;
 
         int cmp_min = -1;
         int cmp_max = -1;
@@ -226,8 +205,6 @@ int main(int argc, char **argv) {
                 print_array(A, n);
             }
 
-            ct_swap = 0;
-            ct_cmp = 0;
             ct_read = 0;
 
             /// algoritmo di sorting
@@ -241,16 +218,6 @@ int main(int argc, char **argv) {
             }
 
             /// statistiche
-            swap_avg += ct_swap;
-            if (swap_min < 0 || swap_min > ct_swap)
-                swap_min = ct_swap;
-            if (swap_max < 0 || swap_max < ct_swap)
-                swap_max = ct_swap;
-            cmp_avg += ct_cmp;
-            if (cmp_min < 0 || cmp_min > ct_cmp)
-                cmp_min = ct_cmp;
-            if (cmp_max < 0 || cmp_max < ct_cmp)
-                cmp_max = ct_cmp;
             read_avg += ct_read;
             if (read_min < 0 || read_min > ct_read)
                 read_min = ct_read;
@@ -259,7 +226,7 @@ int main(int argc, char **argv) {
         }
 
         if (ndiv > 1)
-            cout << n << "," << ntests << "," << swap_min << "," << (0.0 + swap_avg) / ntests << "," << swap_max << "," << cmp_min << "," << (0.0 + cmp_avg) / ntests << "," << cmp_max << "," << read_min << "," << (0.0 + read_avg) / ntests << "," << read_max << "," << 0.0 + n * n << "," << 0.0 + n * log(n) / log(2) << "\n";
+            cout << n << "," << ntests << "," << read_min << "," << (0.0 + read_avg) / ntests << "," << read_max << "," << 0.0 + n * n << "," << 0.0 + n * log(n) / log(2) << "\n";
     }
 
     delete[] A;
